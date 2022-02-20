@@ -4,14 +4,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             path: 'https://pokeapi.co/api/v2/pokemon',
             pokemon: [],
             sprite: '',
-            error: null
         },
 
         actions: {
 
-            getPokemon: () => {
+            getPokemon: async () => {
                 const store = getStore();
-                fetch(store.path + '?limit=20&offset=0', {
+                await fetch(store.path + '?limit=20', {
                     method: 'GET',
                     headers: {
                         "Content-Type": "application/json",
@@ -20,16 +19,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then(resp => resp.json())
                     .then(data => {
                         setStore({
-                            pokemon: data.results,
-                            error: null
+                            pokemon: data.results
                         })
 
                     })
             },
 
-            getSpriteByName: (name) => {
+            getSpriteByName: async (name) => {
                 const store = getStore();
-                fetch(store.path + '/' + name, {
+                await fetch(store.path + '/' + name, {
                     method: 'GET',
                     headers: {
                         "Content-Type": "application/json",
@@ -41,18 +39,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                             sprite: data
                         })
                     })
-            },
-
-            addSprite: () => {
-                const store = getStore();
-                if (store.pokemon.length > 0) {
-                    for (let i = 0; i < store.pokemon.length; i++) {
-                        store.getSpriteByName(store.pokemon[i].name);
-                        if (store.sprite) store.pokemon[i].sprite = store.sprite?.sprites?.front_default
-                    }
-                    return console.log("result", store.pokemon)
-                }
-
             }
         }
     };
