@@ -18,7 +18,7 @@ const injectContext = PassedComponent => {
         );
 
         useEffect(() => {
-            state.actions.getPokemon();
+            state.actions.getPokemon('https://pokeapi.co/api/v2/pokemon?limit=20');
         }, []);
 
         return (

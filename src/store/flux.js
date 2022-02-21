@@ -1,16 +1,16 @@
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
-            path: 'https://pokeapi.co/api/v2/pokemon',
+            path: 'https://pokeapi.co/api/v2/pokemon/?limit=30',
             pokemon: [],
+            next: '',
             sprite: '',
         },
 
         actions: {
 
-            getPokemon: async () => {
-                const store = getStore();
-                await fetch(store.path + '?limit=20', {
+            getPokemon: async (url) => {
+                await fetch(url, {
                     method: 'GET',
                     headers: {
                         "Content-Type": "application/json",
@@ -19,15 +19,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then(resp => resp.json())
                     .then(data => {
                         setStore({
-                            pokemon: data.results
+                            pokemon: data.results,
+                            next: data.next
                         })
-
                     })
             },
 
             getSpriteByName: async (name) => {
-                const store = getStore();
-                await fetch(store.path + '/' + name, {
+                await fetch("https://pokeapi.co/api/v2/pokemon/" + name + "/", {
                     method: 'GET',
                     headers: {
                         "Content-Type": "application/json",
