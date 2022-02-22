@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             pokemon: [],
             next: '',
             sprite: '',
+            favorites: []
         },
 
         actions: {
@@ -38,6 +39,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                             sprite: data
                         })
                     })
+            },
+
+            addFavorites: async (favPokemon) => {
+                const store = getStore();
+                setStore({ favorites: store.favorites.concat(favPokemon) });
             }
         }
     };

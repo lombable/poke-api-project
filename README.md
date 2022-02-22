@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# PokeApi project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is made as a project for Pinflag for the front-end job position.
 
-## Available Scripts
+## How to start this app?
 
-In the project directory, you can run:
+In the project directory, you can run "npm install" to install all dependencies that are needed to run the project. Then, a simple "npm start" will do the trick.
 
-### `npm start`
+### `What's inside this app?`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+It is divided in three different main parts: Landing page, Pokégrid and Favorites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `Landing page:`
 
-### `npm test`
+Where you will find a video playing in the background, and depending if you're checking the video in a desktop computer/laptop or a mobile it will show different videos playing. It has a "start" button that will guide you to the next section:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `Pokégrid`
 
-### `npm run build`
+Here you will find all the pokemon in the national pokédex order, starting on number 1 (Bulbasaur). If you click on the image, you will get detailed information on the pokemon, including number (in national pokédex), height, weight and pokédex description.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In the main page of the pokégrid you have a button where you can add your favorite pokémon to a list so you can read them later on. You can access the Pokégrid or Favorites tab in the top navbar.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+In the pokégrid you can also find a filter where you just type the name and it will automatically filter and try to look for what you're typing. There's also a button in the end of the page to load the next 30 batch of pokémon.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `Favorites`
 
-### `npm run eject`
+In this section you can find all the pokémon you added from the pokégrid rendered by cards where you can also get pokédex information. If there are no pokémon in the favorite list, a message saying "No favorites added" will show up.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### `What's on the navbar on top?`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Easy access to Pokégrid, the landing page and the favorites tab!
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### `What was used to create this project?`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Mainly React to do all the logic and the rendering, Bootstrap in order to get quick elements and make it responsive easily and PokeAPI in order to get information from all the pokémon (fetching data from PokeAPIv2, from "https://pokeapi.co/")

@@ -81,3 +81,8 @@
   min-height: 50% !important;
   min-width: 50% !important;
 }
+
+.card-body {
+  text-decoration: none;
+  color: black;
+}
