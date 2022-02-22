@@ -2,6 +2,8 @@ import React, { useEffect, useContext, useState } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 import { Context } from "../store/injectContext";
+import Navbar from "../components/Navbar";
+import Spinner from "../components/Spinner";
 
 const Pokegrid = () => {
     const { store, actions } = useContext(Context);
@@ -22,6 +24,14 @@ const Pokegrid = () => {
         }
     };
 
+    const favoriteHandler = (pokemon) => {
+        let newFavorite = {
+            "name": pokemon.name,
+            "sprites": pokemon.sprite,
+        }
+        actions.addFavorites(newFavorite);
+    }
+
     useEffect(async () => {
         await actions.getPokemon(loadMore);
         addSprite();
@@ -29,29 +39,31 @@ const Pokegrid = () => {
         setLoadMore(store.next);
     }, [store.next]);
 
+
     const pokemonCardGenerator = filteredPokemon.length > 0 ?
         filteredPokemon.map((pokemon) => {
             return (
                 <div className="col-sm-4 py-2 mt-5" key={pokemon.name}>
                     <div className="card text-center">
                         <div className="card-header">Pokémon: {pokemon.name}</div>
-                        <div className="card-body">
+                        <Link to={"/detailedpoke/" + pokemon.name} className="card-body">
                             <h5 className="card-title">{pokemon.name}</h5>
                             <p className="card-text">
-                                <img
-                                    style={{ height: "100px", width: "100px" }}
-                                    src={pokemon.sprite}
-                                    alt="pokemon-sprite"
-                                />
+                                {pokemon.sprite === undefined ? <Spinner /> :
+                                    <img
+                                        style={{ height: "100px", width: "100px" }}
+                                        src={pokemon.sprite}
+                                        alt="pokemon-sprite"
+                                    />}
                             </p>
-                        </div>
+                        </Link>
                         <div className="card-footer text-muted">
-                            <Link to={"/detailedpoke/" + pokemon.name}>Info adicional</Link>
+                            <button className="btn btn-secondary" onClick={() => favoriteHandler(pokemon)}>Add to favorites</button>
                         </div>
                     </div>
                 </div>
             );
-        }) : "Loading";
+        }) : <Spinner />;
 
     const filterOnChange = (e) => {
         setUserInput(e.target.value)
@@ -60,18 +72,20 @@ const Pokegrid = () => {
     }
 
     return (
-        <div className="container-fluid">
-            <div className="align-center">
-                <input type="text" className="form-control mt-5" placeholder="Filter" aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={(e) => filterOnChange(e)} />
+        <>
+            <Navbar />
+            <div className="container-fluid">
+                <div className="align-center">
+                    <input type="text" className="form-control mt-5" placeholder="Filter" aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={(e) => filterOnChange(e)} />
+                </div>
+                <div className="row">{pokemonCardGenerator}</div>
+                <div className="row">
+                    <div className="mx-auto text-center  px-2 py-5">
+                        <button className="btn btn-light" onClick={() => actions.getPokemon(loadMore)}>Next</button><br />
+                    </div>
+                </div>
             </div>
-            <div className="row">{pokemonCardGenerator}</div>
-            <div className="row">
-                <button className="btn btn-light" onClick={() => actions.getPokemon(loadMore)}>Next</button>
-                <Link className="btn btn-light" to="/">
-                    Go back
-                </Link>
-            </div>
-        </div>
+        </>
     );
 };
 
